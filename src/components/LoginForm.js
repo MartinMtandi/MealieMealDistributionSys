@@ -29,6 +29,9 @@ const useStyles = makeStyles(theme => ({
     margin: {
         margin: theme.spacing(1),
     },
+    span: {
+        fontWeight: '600'
+    }
 }));
 
 
@@ -61,7 +64,7 @@ function LoginForm() {
                 <Paper elevation={3} className={classes.paper}>
                     <div>
                         <Typography variant="h6" gutterBottom>
-                            Login
+                            Admin Login
                         </Typography>
                         <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
                             <InputLabel htmlFor="outlined-adornment-amount">Email</InputLabel>
@@ -105,7 +108,7 @@ function LoginForm() {
                         </Button>
                     </div> 
                 </Paper>
-                <Link to="/" style={{color: '#fff', margin: '15px 0 50px 0', textDecoration: 'none'}}>Go Back</Link>
+                <Link to="/" style={{color: '#fff', margin: '15px 0 50px 0', textDecoration: 'none'}}>Not an Admin? <span className={classes.span}>Go Back</span></Link>
            </div>
         </div>
     )

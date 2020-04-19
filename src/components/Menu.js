@@ -7,6 +7,7 @@ import Logo from '../images/ekhaya.png'
 import Queue from '../images/people.svg'
 import Distribution from '../images/distribution.svg'
 import Blower from '../images/blower.svg'
+import Payment from '../images/payment.svg'
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -27,27 +28,35 @@ function Menu() {
         <div className="auth-card">
             <img style={{marginTop: '50px'}} src={Logo} alt="Logo" />
             <Grid container classname={classes.grid}>
-                <Grid item xs={6} sm={6} md={4}>
+                <Grid item xs={6} sm={6} md={3}>
                     <Paper elevation="3" className={classes.paper}>
                         <img src={Queue} alt="upcoming schedule"  height="80px"/>
                         <Typography variant="h6" gutterBottom>
-                            Upcoming Schedule
+                            Upcoming <br /> Schedule
                         </Typography>
                     </Paper>
                 </Grid>
-                <Grid item xs={6} sm={6} md={4}>
+                <Grid item xs={6} sm={6} md={3}>
                     <Paper elevation="3" className={classes.paper}>
                         <img src={Distribution} alt="distribution" height="80px"/>
                         <Typography variant="h6" gutterBottom>
-                            Distribution Logs
+                            Distribution <br /> Logs
                         </Typography>
                     </Paper>
                 </Grid>
-                <Grid item xs={12} sm={12} md={4}>
+                <Grid item xs={6} sm={6} md={3}>
+                    <Paper elevation="3" className={classes.paper}>
+                        <img src={Payment}  alt="Make Mobile Payment" height="80px"/>
+                        <Typography variant="h6" gutterBottom>
+                            Make <br /> Payment
+                        </Typography>
+                    </Paper>
+                </Grid>
+                <Grid item xs={6} sm={6} md={3}>
                     <Paper elevation="3" className={classes.paper}>
                         <img src={Blower}  alt="whistle blower" height="80px"/>
                         <Typography variant="h6" gutterBottom>
-                            Whistle Blow
+                            Whistle <br /> Blow
                         </Typography>
                     </Paper>
                 </Grid>
