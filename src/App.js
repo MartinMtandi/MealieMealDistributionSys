@@ -1,7 +1,11 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import LoginPage from './pages/LoginPage';
-import MenuPage from './pages/MenuPage';
+import React from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+
+import LoginPage from './pages/LoginPage'
+import MenuPage from './pages/MenuPage'
+import WardScheduleTabs from './pages/WardScheduleTabs'
+import DistributionLogTabs from './pages/DistributionLogsTabs'
+
 import './App.css';
 
 function App() {
@@ -13,6 +17,16 @@ function App() {
             exact
             path="/login"
             component={LoginPage}
+        />
+        <Route 
+            exact
+            path="/schedule"
+            component={WardScheduleTabs}
+        />
+        <Route 
+            exact
+            path="/distribution"
+            component={DistributionLogTabs}
         />
         <Route 
             exact

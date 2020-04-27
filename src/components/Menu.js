@@ -29,20 +29,24 @@ function Menu() {
             <img style={{marginTop: '50px'}} src={Logo} alt="Logo" />
             <Grid container classname={classes.grid}>
                 <Grid item xs={6} sm={6} md={3}>
-                    <Paper elevation="3" className={classes.paper}>
-                        <img src={Queue} alt="upcoming schedule"  height="80px"/>
-                        <Typography variant="h6" gutterBottom>
-                            Upcoming <br /> Schedule
-                        </Typography>
-                    </Paper>
+                    <Link to="/schedule">
+                        <Paper elevation="3" className={classes.paper}>
+                            <img src={Queue} alt="upcoming schedule"  height="80px"/>
+                            <Typography variant="h6" gutterBottom>
+                                Upcoming <br /> Schedule
+                            </Typography>
+                        </Paper>
+                    </Link>
                 </Grid>
                 <Grid item xs={6} sm={6} md={3}>
-                    <Paper elevation="3" className={classes.paper}>
-                        <img src={Distribution} alt="distribution" height="80px"/>
-                        <Typography variant="h6" gutterBottom>
-                            Distribution <br /> Logs
-                        </Typography>
-                    </Paper>
+                    <Link to="/distribution">
+                        <Paper elevation="3" className={classes.paper}>
+                            <img src={Distribution} alt="distribution" height="80px"/>
+                            <Typography variant="h6" gutterBottom>
+                                Distribution <br /> Logs
+                            </Typography>
+                        </Paper>
+                    </Link>
                 </Grid>
                 <Grid item xs={6} sm={6} md={3}>
                     <Paper elevation="3" className={classes.paper}>
