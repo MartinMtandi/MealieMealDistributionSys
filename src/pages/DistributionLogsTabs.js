@@ -2,14 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import SwipeableViews from 'react-swipeable-views'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
-import AppBar from '@material-ui/core/AppBar'
-import Tabs from '@material-ui/core/Tabs'
-import Tab from '@material-ui/core/Tab'
-import Typography from '@material-ui/core/Typography'
-import Box from '@material-ui/core/Box'
+import {AppBar, Tabs, Tab, Typography, Box} from '@material-ui/core'
 
 import CustomAppBar from '../components/AppBar'
-import Scheduler from '../components/Scheduler'
+import Distribution from '../components/DistributionLogs'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -91,13 +87,13 @@ export default function DistributionLogTabs() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-           
+           <Distribution />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          
+          <Distribution />
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-            
+          <Distribution />
         </TabPanel>
       </SwipeableViews>
     </div>

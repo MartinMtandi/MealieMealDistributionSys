@@ -1,12 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Divider from '@material-ui/core/Divider';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
+import {Typography, Container, CssBaseline, Avatar, ListItemAvatar, ListItemText, Divider, ListItem, List} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,6 +21,9 @@ export default function Scheduler() {
   const classes = useStyles();
 
   return (
+    <React.Fragment>
+    <CssBaseline />
+    <Container maxWidth="md">
     <List className={classes.root}>
       <ListItem alignItems="flex-start">
         <ListItemAvatar>
@@ -94,5 +91,7 @@ export default function Scheduler() {
         />
       </ListItem>
     </List>
+    </Container>
+    </React.Fragment>
   );
 }
