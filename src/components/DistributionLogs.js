@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import {ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary, Typography} from '@material-ui/core'
+import {ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary, Typography, CssBaseline, Container} from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 const useStyles = makeStyles((theme) => ({
@@ -28,6 +28,8 @@ export default function DistributionLogs() {
 
   return (
     <div className={classes.root}>
+    <CssBaseline />
+    <Container maxWidth="md">
       <ExpansionPanel expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
@@ -94,6 +96,7 @@ export default function DistributionLogs() {
           </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
+      </Container>
     </div>
   );
 }
