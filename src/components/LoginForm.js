@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import {Paper, IconButton, InputLabel, OutlinedInput,InputAdornment, FormControl, Typography, Button } from '@material-ui/core';
@@ -7,6 +7,8 @@ import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { Link } from 'react-router-dom';
+import { connect, useSelector, useDispatch } from 'react-redux';
+import { login, logout } from '../actions/userActions'
 
 import Logo from '../images/ekhaya.png'
 
@@ -35,10 +37,27 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-function LoginForm() {
+export default function LoginForm(props) {
+
+    const auth = useSelector(state => state.user.loggedin);
+  const token = useSelector(state => state.user.user);
+
+    useEffect(() => {
+  
+        if (auth) {
+          props.history.push('/')
+          console.log(token.access_token)
+        }
+        
+     }
+        , [auth])
+      
+     
+      const dispatch = useDispatch();
+
     const classes = useStyles();
     const [values, setValues] = React.useState({
-        amount: '',
+        email: '',
         password: '',
         weight: '',
         weightRange: '',
@@ -55,7 +74,23 @@ function LoginForm() {
     
       const handleMouseDownPassword = event => {
         event.preventDefault();
-      };
+    };
+    
+
+
+    function handleSubmit() {
+
+        console.log('submit')
+        const userDetails = {
+          email: values.email,
+          password: values.password
+        }
+       
+        dispatch(login(userDetails));
+       
+       
+    
+      }
     
     return (
         <div className={classes.root}>
@@ -70,8 +105,8 @@ function LoginForm() {
                             <InputLabel htmlFor="outlined-adornment-amount">Email</InputLabel>
                             <OutlinedInput
                                 id="outlined-adornment-amount"
-                                value={values.amount}
-                                onChange={handleChange('amount')}
+                                value={values.email}
+                                onChange={handleChange('email')}
                                 startAdornment={<InputAdornment position="start"><MailOutlineIcon /></InputAdornment>}
                                 labelWidth={45}
                             />
@@ -103,6 +138,7 @@ function LoginForm() {
                             color="primary"
                             className={classes.button}
                             startIcon={<LockOpenIcon />}
+                            onClick={handleSubmit}
                         >
                             Sign In
                         </Button>
@@ -114,4 +150,4 @@ function LoginForm() {
     )
 }
 
-export default LoginForm
+

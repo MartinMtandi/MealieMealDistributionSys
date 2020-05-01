@@ -1,16 +1,23 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-
+import {Provider}  from 'react-redux'
 import LoginPage from './pages/LoginPage'
 import MenuPage from './pages/MenuPage'
 import WardScheduleTabs from './pages/WardScheduleTabs'
 import DistributionLogTabs from './pages/DistributionLogsTabs'
-
+import store from './store'
 import './App.css';
+import { createBrowserHistory } from 'history';
+
+
+
 
 function App() {
+
+  const myhistory = createBrowserHistory();
   return (
-    <Router>
+    <Provider store={store}>
+    <Router history={myhistory}>
     <div className="App">
       <Switch>
         <Route 
@@ -35,7 +42,8 @@ function App() {
         />
       </Switch>
     </div>
-    </Router>
+      </Router>
+      </Provider>
   );
 }
 

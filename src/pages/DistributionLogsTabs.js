@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types'
 import SwipeableViews from 'react-swipeable-views'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
@@ -6,6 +6,10 @@ import {AppBar, Tabs, Tab, Typography, Box} from '@material-ui/core'
 
 import CustomAppBar from '../components/AppBar'
 import Distribution from '../components/DistributionLogs'
+
+import { connect, useSelector, useDispatch } from 'react-redux';
+import { fetchSales } from '../actions/saleActions'
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -53,6 +57,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function DistributionLogTabs() {
+
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+
+    // this.props.fetchPosts();    
+    dispatch(fetchSales());
+    
+    
+ }
+ , [])
+
+  const sales = useSelector(state => state.sales.items)
+  console.log(sales)
+
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
@@ -87,13 +107,22 @@ export default function DistributionLogTabs() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-           <Distribution />
+          <Distribution
+            sales={sales}
+            ward={21}
+          />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          <Distribution />
+          <Distribution
+          sales={sales}
+          ward={22}
+          />
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          <Distribution />
+          <Distribution
+          sales={sales}
+          ward={23}
+          />
         </TabPanel>
       </SwipeableViews>
     </div>
