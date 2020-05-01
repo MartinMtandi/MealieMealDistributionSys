@@ -10,7 +10,7 @@ export function login(userDetails) {
           //async function fetchData() {
              /*  setPosts(
                 await */
-        fetch('http://192.168.86.58/portalapi/public/api/login', {
+        fetch('http://maize.ubhejanelabs.com/api/login', {
           method: 'POST',
             headers: {
             'accept':'application/json',
