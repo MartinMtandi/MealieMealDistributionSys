@@ -40,17 +40,17 @@ const useStyles = makeStyles(theme => ({
 export default function LoginForm(props) {
 
     const auth = useSelector(state => state.user.loggedin);
-  const token = useSelector(state => state.user.user);
+    const token = useSelector(state => state.user.user);
 
     useEffect(() => {
   
         if (auth) {
           props.history.push('/')
-          console.log(token.access_token)
+        //   console.log(token.access_token)
         }
         
      }
-        , [auth])
+        , [auth, props.history])
       
      
       const dispatch = useDispatch();
@@ -133,15 +133,17 @@ export default function LoginForm(props) {
                             labelWidth={70}
                         />
                         </FormControl>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            className={classes.button}
-                            startIcon={<LockOpenIcon />}
-                            onClick={handleSubmit}
-                        >
-                            Sign In
-                        </Button>
+                        <Link to="/dashboard">
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                className={classes.button}
+                                startIcon={<LockOpenIcon />}
+                                onClick={handleSubmit}
+                            >
+                                Sign In
+                            </Button>
+                        </Link>
                     </div> 
                 </Paper>
                 <Link to="/" style={{color: '#fff', margin: '15px 0 50px 0', textDecoration: 'none'}}>Not an Admin? <span className={classes.span}>Go Back</span></Link>

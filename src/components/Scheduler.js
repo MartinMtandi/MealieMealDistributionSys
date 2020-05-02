@@ -28,7 +28,7 @@ export default function Scheduler({schedule, ward}) {
      
           {schedule.map(s =>
         
-            (s.ward==ward)&&
+            (s.ward===ward)&&
             <React.Fragment
             key={s.id}
             >
