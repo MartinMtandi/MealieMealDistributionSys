@@ -10,6 +10,7 @@ import HouseholdList from '../components/HouseholdsList';
 import FilterBy from '../components/FilterBy';
 import AdminAppBar from  '../components/AdminAppBar';
 import SearchBy from '../components/SearchBy';
+import HouseholdTable from '../components/HouseholdsTable';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -83,15 +84,15 @@ export default function AdminTabs() {
       </AppBar>
       <TabPanel value={value} index={0}>
       <CssBaseline />
-      <Container maxWidth="sm">
-        <FilterBy />
-        <HouseholdList />
+      <Container maxWidth="md">
+        <HouseholdTable />
       </Container>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <CssBaseline />
-        <Container maxWidth="sm">
+        <Container maxWidth="md">
           <SearchBy />
+          <HouseholdList />
         </Container>
       </TabPanel>
       <TabPanel value={value} index={2}>
