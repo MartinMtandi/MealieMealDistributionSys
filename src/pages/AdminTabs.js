@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import {AppBar, Tabs, Tab, Typography, Box} from '@material-ui/core';
+import {AppBar, Tabs, Tab, Typography, Box, Container, CssBaseline} from '@material-ui/core';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import ScheduleIcon from '@material-ui/icons/Schedule';
-import HelpIcon from '@material-ui/icons/Help';
-import ShoppingBasket from '@material-ui/icons/ShoppingBasket';
-import ThumbDown from '@material-ui/icons/ThumbDown';
-import ThumbUp from '@material-ui/icons/ThumbUp';
+
+import HouseholdList from '../components/HouseholdsList';
+import FilterBy from '../components/FilterBy';
 import AdminAppBar from  '../components/AdminAppBar';
+import SearchBy from '../components/SearchBy';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -74,18 +74,25 @@ export default function AdminTabs() {
           onChange={handleChange}
           variant="fullWidth"
           scrollButtons="off"
-          aria-label="scrollable prevent tabs example"
+          aria-label="scrollable admin tab"
         >
-          <Tab icon={<AssignmentIndIcon />} aria-label="phone" {...a11yProps(0)} />
-          <Tab icon={<MonetizationOnIcon />} aria-label="favorite" {...a11yProps(1)} />
-          <Tab icon={<ScheduleIcon />} aria-label="person" {...a11yProps(2)} />
+          <Tab icon={<AssignmentIndIcon />} aria-label="Household" {...a11yProps(0)} />
+          <Tab icon={<MonetizationOnIcon />} aria-label="Make Sale" {...a11yProps(1)} />
+          <Tab icon={<ScheduleIcon />} aria-label="Scheduling" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        Item One
+      <CssBaseline />
+      <Container maxWidth="sm">
+        <FilterBy />
+        <HouseholdList />
+      </Container>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        <CssBaseline />
+        <Container maxWidth="sm">
+          <SearchBy />
+        </Container>
       </TabPanel>
       <TabPanel value={value} index={2}>
         Item Three
