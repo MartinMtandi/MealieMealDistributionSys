@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import {AppBar, Tabs, Tab, Typography, Box, Container, CssBaseline} from '@material-ui/core';
+import {AppBar, Tabs, Tab, Typography, Box, Container, CssBaseline, Tooltip} from '@material-ui/core';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 
 import HouseholdList from '../components/HouseholdsList';
-import FilterBy from '../components/FilterBy';
 import AdminAppBar from  '../components/AdminAppBar';
 import SearchBy from '../components/SearchBy';
 import HouseholdTable from '../components/HouseholdsTable';
@@ -77,9 +76,15 @@ export default function AdminTabs() {
           scrollButtons="off"
           aria-label="scrollable admin tab"
         >
-          <Tab icon={<AssignmentIndIcon />} aria-label="Household" {...a11yProps(0)} />
-          <Tab icon={<MonetizationOnIcon />} aria-label="Make Sale" {...a11yProps(1)} />
-          <Tab icon={<ScheduleIcon />} aria-label="Scheduling" {...a11yProps(2)} />
+          <Tooltip title="Household">
+            <Tab icon={<AssignmentIndIcon />} aria-label="Household" {...a11yProps(0)} />
+          </Tooltip>
+          <Tooltip title="Make Sale">
+            <Tab icon={<MonetizationOnIcon />} aria-label="Make Sale" {...a11yProps(1)} />
+          </Tooltip>
+          <Tooltip title="Schedules">
+            <Tab icon={<ScheduleIcon />} aria-label="Scheduling" {...a11yProps(2)} />
+          </Tooltip>
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
