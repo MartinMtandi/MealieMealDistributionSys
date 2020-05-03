@@ -76,7 +76,7 @@ export default function AdminTabs() {
           scrollButtons="off"
           aria-label="scrollable admin tab"
         >
-          <Tooltip title="Household">
+          <Tooltip title="Households">
             <Tab icon={<AssignmentIndIcon />} aria-label="Household" {...a11yProps(0)} />
           </Tooltip>
           <Tooltip title="Make Sale">

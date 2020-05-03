@@ -1,10 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Divider from '@material-ui/core/Divider';
-import ListItemText from '@material-ui/core/ListItemText';
-import Typography from '@material-ui/core/Typography';
+import {ListItem, Button, Divider, ListItemText, Typography} from '@material-ui/core';
+import Swal from 'sweetalert2'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,11 +16,35 @@ const useStyles = makeStyles((theme) => ({
   inlinePadding: {
     display: 'inline',
     marginLeft: '3ch'
-  }
+  },
+  margin: {
+    margin: theme.spacing(1),
+    width: '100%'
+  },
 }));
 
 export default function HouseholdsList() {
   const classes = useStyles();
+
+  const handleClick = () => {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Make Payment!'
+      }).then((result) => {
+        if (result.value) {
+          Swal.fire(
+            'Account Debited!',
+            'Payment has been made.',
+            'success'
+          )
+        }
+      })
+  }
 
   return (
     <List className={classes.root}>
@@ -66,7 +88,8 @@ export default function HouseholdsList() {
               >
                 Created
               </Typography>
-              {" — 2 Weeks Ago"}
+              {" — 2 Weeks Ago"}<br/>
+              <Button onClick={handleClick}  size="small" variant="outlined" className={classes.margin}>Make Sale</Button>
             </React.Fragment>
           }
         />
@@ -112,7 +135,8 @@ export default function HouseholdsList() {
               >
                 Created
               </Typography>
-              {" — 1 month Ago"}
+              {" — 1 month Ago"}<br />
+              <Button onClick={handleClick}  size="small" variant="outlined" className={classes.margin}>Make Sale</Button>
             </React.Fragment>
           }
         />
@@ -158,7 +182,8 @@ export default function HouseholdsList() {
               >
                 Created
               </Typography>
-              {" — 1 Year Ago"}
+              {" — 1 Year Ago"}<br />
+              <Button onClick={handleClick}  size="small" variant="outlined" className={classes.margin}>Make Sale</Button>
             </React.Fragment>
           }
         />
