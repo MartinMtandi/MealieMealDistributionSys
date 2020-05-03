@@ -33,7 +33,7 @@ export default function AdminSchedule() {
     <div>
       <form>
       <Typography className={classes.header} variant="h6" gutterBottom>
-        Schedule New Delivery
+        Schedule Distribution
       </Typography>
       <TextField fullWidth value={values.units} className={clsx(classes.margin, classes.textField)} id="units" label="Number of Units" variant="outlined" />
         <FormControl fullWidth className={clsx(classes.margin, classes.textField)} variant="outlined">
@@ -93,7 +93,7 @@ export default function AdminSchedule() {
         value={values.date} 
         className={clsx(classes.margin, classes.textField)} 
         id="date" 
-        label="Delivery Date" 
+        label="Distribution Date" 
         variant="outlined" />
       <Button className={classes.margin} variant="contained" color="primary" disableElevation>
         Submit
