@@ -34,12 +34,12 @@ export default function HouseholdsList() {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, Make Payment!'
+        confirmButtonText: 'Yes, Make Sale!'
       }).then((result) => {
         if (result.value) {
           Swal.fire(
             'Account Debited!',
-            'Payment has been made.',
+            'Sale has been made.',
             'success'
           )
         }
