@@ -2,7 +2,8 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import {ListItem, Button, Divider, ListItemText, Typography} from '@material-ui/core';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
   },
   margin: {
     margin: theme.spacing(1),
-    width: '100%'
   },
 }));
 
@@ -40,6 +40,43 @@ export default function HouseholdsList() {
           Swal.fire(
             'Account Debited!',
             'Sale has been made.',
+            'success'
+          )
+        }
+      })
+  }
+
+  const handleVerification = () => {
+    Swal.fire({
+        title: 'Enter ticket number',
+        input: 'text',
+        inputAttributes: {
+          autocapitalize: 'off'
+        },
+        showCancelButton: true,
+        confirmButtonText: 'Verify',
+        showLoaderOnConfirm: true,
+        //for testing purposes enter your github username to test what happens when you fireup this function
+        preConfirm: (login) => {
+          return fetch(`//api.github.com/users/${login}`)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error(response.statusText)
+              }
+              return response.json()
+            })
+            .catch(error => {
+              Swal.showValidationMessage(
+                `Request failed: ${error}`
+              )
+            })
+        },
+        allowOutsideClick: () => !Swal.isLoading()
+      }).then((result) => {
+        if (result.value) {
+          Swal.fire(
+            'Verification Successful!',
+            'Ticket No. is valid',
             'success'
           )
         }
@@ -89,6 +126,7 @@ export default function HouseholdsList() {
                 Created
               </Typography>
               {" — 2 Weeks Ago"}<br/>
+              <Button onClick={handleVerification}  size="small" variant="outlined" startIcon={<ErrorOutlineIcon />} className={classes.margin}>Verify Customer</Button>
               <Button onClick={handleClick}  size="small" variant="outlined" className={classes.margin}>Make Sale</Button>
             </React.Fragment>
           }
@@ -136,6 +174,7 @@ export default function HouseholdsList() {
                 Created
               </Typography>
               {" — 1 month Ago"}<br />
+              <Button onClick={handleVerification}  size="small" variant="outlined" startIcon={<ErrorOutlineIcon />} className={classes.margin}>Verify Customer</Button>
               <Button onClick={handleClick}  size="small" variant="outlined" className={classes.margin}>Make Sale</Button>
             </React.Fragment>
           }
@@ -183,6 +222,7 @@ export default function HouseholdsList() {
                 Created
               </Typography>
               {" — 1 Year Ago"}<br />
+              <Button onClick={handleVerification}  size="small" variant="outlined" startIcon={<ErrorOutlineIcon />} className={classes.margin}>Verify Customer</Button>
               <Button onClick={handleClick}  size="small" variant="outlined" className={classes.margin}>Make Sale</Button>
             </React.Fragment>
           }
