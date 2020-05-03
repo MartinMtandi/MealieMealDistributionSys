@@ -10,6 +10,7 @@ import HouseholdList from '../components/HouseholdsList';
 import AdminAppBar from  '../components/AdminAppBar';
 import SearchBy from '../components/SearchBy';
 import HouseholdTable from '../components/HouseholdsTable';
+import AdminSchedule from '../components/AdminSchedule';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -101,7 +102,10 @@ export default function AdminTabs() {
         </Container>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Item Three
+      <CssBaseline />
+        <Container maxWidth="md">
+        <AdminSchedule />
+        </Container>
       </TabPanel>
     </div>
   );
