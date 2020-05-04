@@ -18,24 +18,17 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 
-export default function MaterialTableDemo() {
+export default function FamilyDetails() {
   const [state, setState] = React.useState({
     columns: [
-      { title: 'Address', field: 'address' },
-      { title: 'Family ID', field: 'household' },
       { title: 'Name', field: 'head' },
       { title: 'Phone', field: 'phone', type: 'numeric' },
       { title: 'Members', field: 'members', type: 'numeric' },
-      {
-        title: 'Ward',
-        field: 'ward',
-        lookup: { 20: 'Ward 20', 21: 'Ward 21', 22: 'Ward 22' },
-      },
     ],
     data: [
-      { address: '8633 Nku', household: 'B', head: 'Kimberly Nkala',phone: '071456188', members: 8, ward: 20 },
-      { address: '16543 Nku', household: 'A', head: 'Chipo Hungwe',phone: '077631881', members: 3, ward: 21 },
-      { address: '14389 Nkul', household: 'B', head: 'Elton Sibanda',phone: '077388984', members: 2, ward: 22 },
+      { head: 'Kimberly Nkala',phone: '071456188', members: 8 },
+      { head: 'Chipo Hungwe',phone: '077631881', members: 3},
+      { head: 'Elton Sibanda',phone: '077388984', members: 2 },
     ],
   });
 
@@ -62,7 +55,7 @@ export default function MaterialTableDemo() {
   return (
     <MaterialTable
       icons={tableIcons}
-      title="Household List"
+      title="Household Families"
       columns={state.columns}
       data={state.data}
       editable={{

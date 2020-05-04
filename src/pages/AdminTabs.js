@@ -9,7 +9,7 @@ import ScheduleIcon from '@material-ui/icons/Schedule';
 import HouseholdList from '../components/HouseholdsList';
 import AdminAppBar from  '../components/AdminAppBar';
 import SearchBy from '../components/SearchBy';
-import HouseholdTable from '../components/HouseholdsTable';
+import ManageHouseholds from '../components/ManageHouseholds';
 import AdminSchedule from '../components/AdminSchedule';
 
 function TabPanel(props) {
@@ -90,8 +90,8 @@ export default function AdminTabs() {
       </AppBar>
       <TabPanel value={value} index={0}>
       <CssBaseline />
-      <Container maxWidth="md">
-        <HouseholdTable />
+      <Container maxWidth="sm">
+        <ManageHouseholds />
       </Container>
       </TabPanel>
       <TabPanel value={value} index={1}>
