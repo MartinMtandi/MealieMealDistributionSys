@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { Select, TextField, InputLabel, FormControl, MenuItem, Button, Typography } from '@material-ui/core';
 import { connect, useSelector, useDispatch } from 'react-redux';
+import { newHousehold } from '../actions/householdActions';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -39,6 +40,7 @@ export default function CreateHousehold() {
       place: values.place
      }
   
+    dispatch(newHousehold(household))
      console.log(household)
 
   }
@@ -50,7 +52,7 @@ export default function CreateHousehold() {
         </Typography>
         <TextField 
           fullWidth 
-          value={values.units} 
+          value={values.address} 
           onChange={handleChange('address')} 
           className={clsx(classes.margin, classes.textField)} 
           id="address" 
