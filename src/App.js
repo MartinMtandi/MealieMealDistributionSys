@@ -7,6 +7,7 @@ import MenuPage from './pages/MenuPage'
 import WardScheduleTabs from './pages/WardScheduleTabs'
 import DistributionLogTabs from './pages/DistributionLogsTabs'
 import AdminTabs from './pages/AdminTabs'
+import NewHousehold from './pages/CreateHouseholdPage'
 
 import store from './store'
 import './App.css';
@@ -37,6 +38,11 @@ function App() {
             exact
             path="/distribution"
             component={DistributionLogTabs}
+        />
+        <Route 
+            exact
+            path="/create-household"
+            component={NewHousehold}
         />
         <Route 
             exact

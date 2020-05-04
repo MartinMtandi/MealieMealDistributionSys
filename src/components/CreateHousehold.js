@@ -1,9 +1,9 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import { Select, TextField, OutlinedInput, InputLabel, InputAdornment, FormControl, MenuItem, Button, Typography } from '@material-ui/core';
+import { Select, TextField, InputLabel, FormControl, MenuItem, Button, Typography } from '@material-ui/core';
 import { connect, useSelector, useDispatch } from 'react-redux';
-import { newSchedule } from '../actions/scheduleActions'
+
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -17,17 +17,15 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function AdminSchedule() {
+export default function CreateHousehold() {
 
   const dispatch = useDispatch();
 
   const classes = useStyles();
   const [values, setValues] = React.useState({
-    units: '',
-    weight: '',
+    address: '',
     ward: '',
     place: '',
-    date: '',
   });
 
   const handleChange = (prop) => (event) => {
@@ -35,45 +33,30 @@ export default function AdminSchedule() {
   };
 
   const handleSubmit = () => {
-    const schedule = {
-      units: values.units,
+    const household = {
+      address: values.address,
       ward: values.ward,
-      place: values.place,
-      date: values.date
+      place: values.place
      }
-    dispatch(newSchedule(schedule))
+  
+     console.log(household)
 
   }
   return (
     <div>
       <form>
         <Typography className={classes.header} variant="h6" gutterBottom>
-          Schedule Distribution
+         Create New Household
         </Typography>
         <TextField 
           fullWidth 
           value={values.units} 
-          onChange={handleChange('units')} 
+          onChange={handleChange('address')} 
           className={clsx(classes.margin, classes.textField)} 
-          id="units" 
-          type="number"
-          label="Number of Units" 
+          id="address" 
+          label="Address" 
           variant="outlined" 
         />
-        <FormControl fullWidth className={clsx(classes.margin, classes.textField)} variant="outlined">
-        <InputLabel htmlFor="kgs">Total Weight (Kgs)</InputLabel>
-          <OutlinedInput
-            id="kgs"
-            value={values.weight}
-            onChange={handleChange('weight')}
-            endAdornment={<InputAdornment position="end">Kg</InputAdornment>}
-            aria-describedby="kgs"
-            inputProps={{
-              'aria-label': 'weight',
-            }}
-            labelWidth={140}
-          />
-        </FormControl>
         <FormControl fullWidth variant="outlined" className={clsx(classes.margin, classes.textField)}>
         <InputLabel id="select-ward">Ward</InputLabel>
         <Select
@@ -108,18 +91,6 @@ export default function AdminSchedule() {
           <MenuItem value="White house">White House</MenuItem>
         </Select>
       </FormControl>
-      <TextField 
-        fullWidth 
-        type="date" 
-        InputLabelProps={{
-            shrink: true,
-          }} 
-        value={values.date} 
-        onChange={handleChange('date')}
-        className={clsx(classes.margin, classes.textField)} 
-        id="date" 
-        label="Distribution Date" 
-        variant="outlined" />
         <Button
           className={classes.margin}
           variant="contained"

@@ -4,6 +4,7 @@ import {AppBar, Toolbar, Typography, MenuItem, Menu} from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#9D43FF',
     color: '#fff',
     fontWeight: 700
+  },
+  link: {
+    color: '#000'
   }
 }));
 
@@ -39,9 +43,11 @@ export default function MenuAppBar() {
     <div className={classes.root}>
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <HomeIcon />
-          </IconButton>
+          <Link style={{color: '#fff'}} to="/dashboard">
+            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+              <HomeIcon />
+            </IconButton>
+          </Link>
           <Typography variant="h6" className={classes.title}>
             Nkulumane Community
           </Typography>
@@ -71,6 +77,7 @@ export default function MenuAppBar() {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}>My Account</MenuItem>
+                <MenuItem ><Link className={classes.link} to="/create-household">Create Household</Link></MenuItem>
                 <MenuItem onClick={handleClose}>Logout</MenuItem>
               </Menu>
             </div>
