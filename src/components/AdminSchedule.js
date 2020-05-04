@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import {Select, TextField, OutlinedInput, InputLabel, InputAdornment, FormControl, MenuItem, Button, Typography} from '@material-ui/core';
+import { Select, TextField, OutlinedInput, InputLabel, InputAdornment, FormControl, MenuItem, Button, Typography } from '@material-ui/core';
+import { connect, useSelector, useDispatch } from 'react-redux';
+import { newSchedule } from '../actions/scheduleActions'
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -16,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function AdminSchedule() {
+
+  const dispatch = useDispatch();
+
   const classes = useStyles();
   const [values, setValues] = React.useState({
     units: '',
@@ -29,13 +34,24 @@ export default function AdminSchedule() {
     setValues({ ...values, [prop]: event.target.value });
   };
 
+  const handleSubmit = () => {
+    const schedule = {
+      units: values.units,
+      ward: values.ward,
+      place: values.place,
+      date:"2020-05-05"//values.date""
+     }
+
+    dispatch(newSchedule(schedule))
+
+  }
   return (
     <div>
       <form>
       <Typography className={classes.header} variant="h6" gutterBottom>
         Schedule Distribution
       </Typography>
-      <TextField fullWidth value={values.units} className={clsx(classes.margin, classes.textField)} id="units" label="Number of Units" variant="outlined" />
+      <TextField fullWidth value={values.units} onChange={handleChange('units')} className={clsx(classes.margin, classes.textField)} id="units" label="Number of Units" variant="outlined" />
         <FormControl fullWidth className={clsx(classes.margin, classes.textField)} variant="outlined">
         <InputLabel htmlFor="kgs">Total Weight (Kgs)</InputLabel>
           <OutlinedInput
@@ -62,9 +78,9 @@ export default function AdminSchedule() {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          <MenuItem value={20}>Ward 20</MenuItem>
           <MenuItem value={21}>Ward 21</MenuItem>
           <MenuItem value={22}>Ward 22</MenuItem>
+          <MenuItem value={23}>Ward 23</MenuItem>
         </Select>
       </FormControl>
       <FormControl fullWidth variant="outlined" className={clsx(classes.margin, classes.textField)}>
@@ -79,9 +95,9 @@ export default function AdminSchedule() {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          <MenuItem value="Coolland Supermarket">Coolland Supermarket</MenuItem>
-          <MenuItem value="Mqamulazwe Suprette">Mqamulazwe Suprette</MenuItem>
-          <MenuItem value="White House">White House</MenuItem>
+          <MenuItem value="coolland">Coolland Supermarket</MenuItem>
+          <MenuItem value="manemo">Manemo Suprette</MenuItem>
+          <MenuItem value="White house">White House</MenuItem>
         </Select>
       </FormControl>
       <TextField 
@@ -95,7 +111,13 @@ export default function AdminSchedule() {
         id="date" 
         label="Distribution Date" 
         variant="outlined" />
-      <Button className={classes.margin} variant="contained" color="primary" disableElevation>
+        <Button
+          className={classes.margin}
+          variant="contained"
+          color="primary"
+          disableElevation
+          onClick={handleSubmit}
+        >
         Submit
       </Button>
       </form>

@@ -21,3 +21,23 @@ export function fetchSales() {
             }
 
 }
+
+export function newSale($sale) {
+    
+    console.log("schedule");
+    return async function (dispatch) {
+ 
+        
+     await   axios.post('http://maize.ubhejanelabs.com/api/household"', $sale)
+        .then(sale => dispatch({
+            type: NEW_SALE,
+            payload:sale.data
+        })
+        )
+        .catch(function (error) {
+            console.log(error);
+          });
+
+            }
+
+}

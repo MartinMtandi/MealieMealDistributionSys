@@ -1,4 +1,4 @@
-import { FETCH_SCHEDULE, NEW_SCHEDULE } from "../actions/types";
+import { FETCH_HOUSEHOLD, NEW_SCHEDULE } from "../actions/types";
 
 const initialSate = {
     items:[],
@@ -10,17 +10,12 @@ export default function (state = initialSate, action) {
     
     switch (action.type) {
 
-        case FETCH_SCHEDULE:
+        case FETCH_HOUSEHOLD:
             return {
                 ...state,
                 items: action.payload
             };
         
-        case NEW_SCHEDULE:
-                return {
-                    ...state,
-                    item: action.payload
-                };
         default:
             return state;
     }
