@@ -90,7 +90,7 @@ export default function AdminTabs() {
       </AppBar>
       <TabPanel value={value} index={0}>
       <CssBaseline />
-      <Container maxWidth="sm">
+      <Container maxWidth="md">
         <ManageHouseholds />
       </Container>
       </TabPanel>

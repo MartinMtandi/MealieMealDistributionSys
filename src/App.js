@@ -8,7 +8,6 @@ import WardScheduleTabs from './pages/WardScheduleTabs'
 import DistributionLogTabs from './pages/DistributionLogsTabs'
 import AdminTabs from './pages/AdminTabs'
 import NewHousehold from './pages/CreateHouseholdPage'
-import FamilyPage from './pages/FamilyPage'
 
 import store from './store'
 import './App.css';
@@ -34,10 +33,6 @@ function App() {
             exact
             path="/schedule"
             component={WardScheduleTabs}
-        />
-        <Route 
-            path="/family"
-            component={FamilyPage}
         />
         <Route 
             exact

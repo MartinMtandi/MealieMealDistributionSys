@@ -1,90 +1,245 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import FolderIcon from '@material-ui/icons/Folder';
-import PageviewIcon from '@material-ui/icons/Pageview';
-import { Link } from 'react-router-dom';
-
+import {ListItem, Button, Divider, ListItemText, Typography, TextField, Paper} from '@material-ui/core';
+import GroupAddIcon from '@material-ui/icons/GroupAdd';
+import EditIcon from '@material-ui/icons/Edit';
+import ClearIcon from '@material-ui/icons/Clear';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
     width: '100%',
-  },
-  demo: {
     backgroundColor: theme.palette.background.paper,
   },
-  title: {
-    margin: theme.spacing(4, 0, 2),
-    textAlign: 'center'
+  inline: {
+    display: 'inline',
+    textTransform: 'uppercase'
   },
+  inlinePadding: {
+    display: 'inline',
+    marginLeft: '3ch'
+  },
+  margin: {
+    margin: theme.spacing(1),
+  },
+  form: {
+    '& .MuiTextField-root': {
+      margin: theme.spacing(1),
+    },
+  },
+  paper: {
+    margin: theme.spacing(1),
+    padding: theme.spacing(1, 3, 1, 1)
+  }
 }));
 
-
-export default function ManageHouseholds() {
+export default function HouseholdsList() {
   const classes = useStyles();
-  const [dense, setDense] = React.useState(false);
-  const [secondary, setSecondary] = React.useState(false);
+
+  const [count, setCount] = useState(0)
+
+  const [values, setValues] = React.useState({
+    name: '',
+    phone: '',
+    members: '',
+  });
+
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log(values)
+  }
 
   return (
-    <div className={classes.root}>
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={12}>
-          <Typography variant="h6" className={classes.title}>
-            Manage Households
-          </Typography>
-          <div className={classes.demo}>
-            <List dense={dense}>
-                <ListItem>
-                  <ListItemAvatar>
-                    <Avatar>
-                      <FolderIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary="16436 Nkulumane, Ward 20- Coolland"
-                    secondary={secondary ? 'Secondary text' : null}
-                  />
-                  <ListItemSecondaryAction>
-                    <Link to="/family/9">
-                        <IconButton edge="end" aria-label="view more">
-                        <PageviewIcon />
-                        </IconButton>
-                    </Link>
-                  </ListItemSecondaryAction>
-                </ListItem>
-            </List>
-            <List dense={dense}>
-                <ListItem>
-                  <ListItemAvatar>
-                    <Avatar>
-                      <FolderIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary="8831 Nkulumane, Ward 21- Manemo"
-                    secondary={secondary ? 'Secondary text' : null}
-                  />
-                  <ListItemSecondaryAction>
-                    <Link to="/family/10">
-                    <IconButton edge="end" aria-label="view more">
-                      <PageviewIcon />
-                    </IconButton>
-                    </Link>
-                  </ListItemSecondaryAction>
-                </ListItem>
-            </List>
-          </div>
-        </Grid>
-      </Grid>
-    </div>
+    <List className={classes.root}>
+      <ListItem alignItems="flex-start">
+        <ListItemText
+          primary="16125 Nkulumane 12"
+          secondary={
+            <React.Fragment>
+              <Typography
+                component="span"
+                variant="body2"
+                className={classes.inline}
+                color="textPrimary"
+              >
+                Melusi Sibanda
+              </Typography>
+              {" — 0775412662"} <br />
+              <Typography
+                component="span"
+                variant="body2"
+                className={classes.inlinePadding}
+                color="textPrimary"
+              >
+                Family Members
+              </Typography>
+              {" — 2"} <br />
+              <Typography
+                component="span"
+                variant="body2"
+                className={classes.inlinePadding}
+                color="textPrimary"
+              >
+                Household
+              </Typography>
+              {" — B"} <br />
+              <Typography
+                component="span"
+                variant="body2"
+                className={classes.inlinePadding}
+                color="textPrimary"
+              >
+                Created
+              </Typography>
+              {" — 2 Weeks Ago"}<br/>
+              {(count === 1) && 
+              <Paper variant="outlined" className={classes.paper}>
+                {/**CREATE FORM TO CAPTURE FAMILY DETAILS */}
+              <form className={classes.form} noValidate autoComplete="off" onSubmit={handleSubmit}>
+                <Typography style={{textAlign: 'center'}} variant="overline" display="block" gutterBottom>
+                    Add Family To Household
+                </Typography>
+                    <TextField
+                        label="Head of Family"
+                        value={values.name} 
+                        onChange={handleChange('name')} 
+                        fullWidth
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        variant="outlined"
+                    />
+                    <TextField
+                        label="Phone Number"
+                        type="number"
+                        value={values.phone} 
+                        onChange={handleChange('phone')} 
+                        fullWidth
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        variant="outlined"
+                    />
+                    <TextField
+                        label="No. Of Family Members"
+                        type="number"
+                        value={values.members} 
+                        onChange={handleChange('members')} 
+                        fullWidth
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        variant="outlined"
+                    />
+                  <Button type="submit" size="small"variant="contained" color="primary" className={classes.margin}>Submit</Button>
+              </form>
+              </Paper>}
+              {(count === 0) &&  <React.Fragment>
+                <Button size="small" variant="outlined" startIcon={<GroupAddIcon />} className={classes.margin} onClick={() => setCount(1)}>Add Family</Button>
+                <Button size="small" variant="outlined" startIcon={<EditIcon />} className={classes.margin}>Edit</Button>
+              </React.Fragment>}
+              {(count === 1) && <Button size="small" variant="outlined" startIcon={<ClearIcon />} className={classes.margin} onClick={() => setCount(0)}>Clear</Button>}
+            </React.Fragment>
+          }
+        />
+      </ListItem>
+      <Divider variant="inset" component="li" />
+      <ListItem alignItems="flex-start">
+        <ListItemText
+          primary="8845 Nkulumane 12"
+          secondary={
+            <React.Fragment>
+              <Typography
+                component="span"
+                variant="body2"
+                className={classes.inline}
+                color="textPrimary"
+              >
+                Alice Chigomba
+              </Typography>
+              {" — 0772113862"} <br />
+              <Typography
+                component="span"
+                variant="body2"
+                className={classes.inlinePadding}
+                color="textPrimary"
+              >
+                Family Members
+              </Typography>
+              {" — 4"} <br />
+              <Typography
+                component="span"
+                variant="body2"
+                className={classes.inlinePadding}
+                color="textPrimary"
+              >
+                Household
+              </Typography>
+              {" — A"} <br />
+              <Typography
+                component="span"
+                variant="body2"
+                className={classes.inlinePadding}
+                color="textPrimary"
+              >
+                Created
+              </Typography>
+              {" — 1 month Ago"}<br />
+              {(count === 2) && 
+              <Paper variant="outlined" className={classes.paper}>
+                {/**CREATE FORM TO CAPTURE FAMILY DETAILS */}
+              <form className={classes.form} noValidate autoComplete="off" onSubmit={handleSubmit}>
+                <Typography style={{textAlign: 'center'}} variant="overline" display="block" gutterBottom>
+                    Add Family To Household
+                </Typography>
+                    <TextField
+                        label="Head of Family"
+                        value={values.name} 
+                        onChange={handleChange('name')} 
+                        fullWidth
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        variant="outlined"
+                    />
+                    <TextField
+                        label="Phone Number"
+                        type="number"
+                        value={values.phone} 
+                        onChange={handleChange('phone')} 
+                        fullWidth
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        variant="outlined"
+                    />
+                    <TextField
+                        label="No. Of Family Members"
+                        type="number"
+                        value={values.members} 
+                        onChange={handleChange('members')} 
+                        fullWidth
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        variant="outlined"
+                    />
+                  <Button type="submit" size="small"variant="contained" color="primary" className={classes.margin}>Submit</Button>
+              </form>
+              </Paper>}
+              {(count === 0) &&  <React.Fragment>
+                <Button size="small" variant="outlined" startIcon={<GroupAddIcon />} className={classes.margin} onClick={() => setCount(2)}>Add Family</Button>
+                <Button size="small" variant="outlined" startIcon={<EditIcon />} className={classes.margin}>Edit</Button>
+              </React.Fragment>}
+              {(count === 2) && <Button size="small" variant="outlined" startIcon={<ClearIcon />} className={classes.margin} onClick={() => setCount(0)}>Clear</Button>}
+            </React.Fragment>
+          }
+        />
+      </ListItem>
+    </List>
   );
 }

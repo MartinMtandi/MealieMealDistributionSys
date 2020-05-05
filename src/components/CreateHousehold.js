@@ -50,7 +50,7 @@ export default function CreateHousehold() {
         </Typography>
         <TextField 
           fullWidth 
-          value={values.units} 
+          value={values.address} 
           onChange={handleChange('address')} 
           className={clsx(classes.margin, classes.textField)} 
           id="address" 
