@@ -7,7 +7,7 @@ export function fetchSchedule() {
     console.log("schedule");
     return async function (dispatch) {
         
-        await axios.get("http://maize.ubhejanelabs.com/api/schedule")
+        await axios.get("http://portalapi.test/api/schedule")
             .then(schedule => dispatch({
                 type: FETCH_SCHEDULE,
                 payload:schedule.data
