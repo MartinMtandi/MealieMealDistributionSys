@@ -1,10 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, Fragment} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import {ListItem, Button, Divider, ListItemText, Typography, TextField, Paper} from '@material-ui/core';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
-import EditIcon from '@material-ui/icons/Edit';
-import ClearIcon from '@material-ui/icons/Clear';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,7 +35,8 @@ const useStyles = makeStyles((theme) => ({
 export default function HouseholdsList() {
   const classes = useStyles();
 
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const [family, setFamily] = useState('');
 
   const [values, setValues] = React.useState({
     name: '',
@@ -57,9 +57,10 @@ export default function HouseholdsList() {
     <List className={classes.root}>
       <ListItem alignItems="flex-start">
         <ListItemText
-          primary="16125 Nkulumane 12"
+          primary="16125 Nkulumane 12, Ward 20- Coolland"
           secondary={
             <React.Fragment>
+              {(family === '16125') && <Fragment>
               <Typography
                 component="span"
                 variant="body2"
@@ -95,7 +96,7 @@ export default function HouseholdsList() {
               >
                 Created
               </Typography>
-              {" — 2 Weeks Ago"}<br/>
+              {" — 2 Weeks Ago"}</Fragment>}<br/>
               {(count === 1) && 
               <Paper variant="outlined" className={classes.paper}>
                 {/**CREATE FORM TO CAPTURE FAMILY DETAILS */}
@@ -137,12 +138,10 @@ export default function HouseholdsList() {
                     />
                   <Button type="submit" size="small"variant="contained" color="primary" className={classes.margin}>Submit</Button>
               </form>
-              </Paper>}
-              {(count === 0) &&  <React.Fragment>
-                <Button size="small" variant="outlined" startIcon={<GroupAddIcon />} className={classes.margin} onClick={() => setCount(1)}>Add Family</Button>
-                <Button size="small" variant="outlined" startIcon={<EditIcon />} className={classes.margin}>Edit</Button>
-              </React.Fragment>}
-              {(count === 1) && <Button size="small" variant="outlined" startIcon={<ClearIcon />} className={classes.margin} onClick={() => setCount(0)}>Clear</Button>}
+              </Paper>}<React.Fragment>
+                {(family === '16125') ? <Button size="small" variant="outlined" startIcon={<VisibilityIcon />} className={classes.margin} onClick={() => setFamily('')}>Clear Family</Button> : <Button size="small" variant="outlined" startIcon={<VisibilityIcon />} className={classes.margin} onClick={() => setFamily('16125')}>View Family</Button>}
+                {(count === 0) ? <Button size="small" variant="outlined" startIcon={<GroupAddIcon />} className={classes.margin} onClick={() => setCount(1)}>Add Family</Button> : <Button size="small" variant="outlined" startIcon={<GroupAddIcon />} className={classes.margin} onClick={() => setCount(0)}>Clear Family</Button>}
+              </React.Fragment>
             </React.Fragment>
           }
         />
@@ -150,9 +149,10 @@ export default function HouseholdsList() {
       <Divider variant="inset" component="li" />
       <ListItem alignItems="flex-start">
         <ListItemText
-          primary="8845 Nkulumane 12"
+          primary="8845 Nkulumane 12, Ward 21- Manemo"
           secondary={
             <React.Fragment>
+              {(family === '8845') && <Fragment>
               <Typography
                 component="span"
                 variant="body2"
@@ -188,7 +188,9 @@ export default function HouseholdsList() {
               >
                 Created
               </Typography>
-              {" — 1 month Ago"}<br />
+              {" — 1 month Ago"}
+                </Fragment>}
+              <br />
               {(count === 2) && 
               <Paper variant="outlined" className={classes.paper}>
                 {/**CREATE FORM TO CAPTURE FAMILY DETAILS */}
@@ -230,12 +232,10 @@ export default function HouseholdsList() {
                     />
                   <Button type="submit" size="small"variant="contained" color="primary" className={classes.margin}>Submit</Button>
               </form>
-              </Paper>}
-              {(count === 0) &&  <React.Fragment>
-                <Button size="small" variant="outlined" startIcon={<GroupAddIcon />} className={classes.margin} onClick={() => setCount(2)}>Add Family</Button>
-                <Button size="small" variant="outlined" startIcon={<EditIcon />} className={classes.margin}>Edit</Button>
-              </React.Fragment>}
-              {(count === 2) && <Button size="small" variant="outlined" startIcon={<ClearIcon />} className={classes.margin} onClick={() => setCount(0)}>Clear</Button>}
+              </Paper>}<React.Fragment>
+                {(family === '8845') ? <Button size="small" variant="outlined" startIcon={<VisibilityIcon />} className={classes.margin} onClick={() => setFamily('')}>Clear Family</Button> : <Button size="small" variant="outlined" startIcon={<VisibilityIcon />} className={classes.margin} onClick={() => setFamily('8845')}>View Family</Button>}
+                {(count === 0) ? <Button size="small" variant="outlined" startIcon={<GroupAddIcon />} className={classes.margin} onClick={() => setCount(2)}>Add Family</Button> : <Button size="small" variant="outlined" startIcon={<GroupAddIcon />} className={classes.margin} onClick={() => setCount(0)}>Clear Family</Button>}
+              </React.Fragment>
             </React.Fragment>
           }
         />
