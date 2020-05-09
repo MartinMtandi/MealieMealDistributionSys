@@ -7,7 +7,7 @@ export function fetchSales() {
     console.log("schedule");
     return async function (dispatch) {
         
-        await axios.get("http://portalapi.test/api/sales")
+        await axios.get("http://maize.ubhejanelabs.com/api/sales")
             .then(sales=> dispatch({
                 type: FETCH_SALE,
                 payload:sales.data
@@ -41,7 +41,7 @@ export function newSale(sale) {
     return async function (dispatch) {
  
         
-        await axios.post('http://portalapi.test/api/sale', sale, {
+        await axios.post('http://maize.ubhejanelabs.com/api/sale', sale, {
          headers:headers
      })
          .then(sale => {

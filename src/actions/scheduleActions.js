@@ -7,7 +7,7 @@ export function fetchSchedule() {
     console.log("schedule");
     return async function (dispatch) {
         
-        await axios.get("http://portalapi.test/api/schedule")
+        await axios.get("http://maize.ubhejanelabs.com/api/schedule")
             .then(schedule => dispatch({
                 type: FETCH_SCHEDULE,
                 payload:schedule.data
@@ -37,7 +37,7 @@ export function newSchedule(schedule) {
     return async function (dispatch) {
  
         
-     await   axios.post('http://portalapi.test/api/schedule', schedule, {
+     await   axios.post('http://maize.ubhejanelabs.com/api/schedule', schedule, {
         headers: headers
       })
          .then(schedule => {

@@ -42,7 +42,7 @@ export function newFamily(family) {
     return async function (dispatch) {
  
         
-        await axios.post('http://portalapi.test/api/family', family, {
+        await axios.post('http://maize.ubhejanelabs.com/api/family', family, {
          headers:headers
      })
          .then(family => {

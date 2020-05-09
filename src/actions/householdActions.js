@@ -7,7 +7,7 @@ export function fetchHouseholds() {
     console.log("schedule");
     return async function (dispatch) {
         
-        await axios.get("http://portalapi.test/api/households")//http://maize.ubhejanelabs.com/api/households")
+        await axios.get("http://maize.ubhejanelabs.com/api/households")//http://maize.ubhejanelabs.com/api/households")
             .then(household => dispatch({
                 type: FETCH_HOUSEHOLD,
                 payload:household.data
@@ -41,7 +41,7 @@ export function newHousehold(household) {
     return async function (dispatch) {
  
         
-        await axios.post('http://portalapi.test/api/household', household, {
+        await axios.post('http://maize.ubhejanelabs.com/api/household', household, {
             headers: headers
         })
             .then(household => {
