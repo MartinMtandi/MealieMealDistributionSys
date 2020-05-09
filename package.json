@@ -1,6 +1,7 @@
 {
-  "name": "wolim_commitment_card",
+  "name": "nkulumane_maize_distribution",
   "version": "0.1.0",
+  "homepage": "http://nkulumane.com/",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.9.10",
