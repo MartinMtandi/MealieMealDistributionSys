@@ -96,9 +96,9 @@ export default function DistributionLogTabs() {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab label="Ward 21" {...a11yProps(0)} />
+          <Tab label="Ward 20" {...a11yProps(0)} />
           <Tab label="Ward 22" {...a11yProps(1)} />
-          <Tab label="Ward 23" {...a11yProps(2)} />
+          <Tab label="Ward 24" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -109,7 +109,7 @@ export default function DistributionLogTabs() {
         <TabPanel value={value} index={0} dir={theme.direction}>
           <Distribution
             sales={sales}
-            ward={21}
+            ward={20}
           />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
@@ -121,7 +121,7 @@ export default function DistributionLogTabs() {
         <TabPanel value={value} index={2} dir={theme.direction}>
           <Distribution
           sales={sales}
-          ward={23}
+          ward={24}
           />
         </TabPanel>
       </SwipeableViews>
