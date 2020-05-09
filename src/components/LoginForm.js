@@ -45,7 +45,7 @@ export default function LoginForm(props) {
     useEffect(() => {
   
         if (auth) {
-          props.history.push('/')
+          props.history.push('/dashboard')
         //   console.log(token.access_token)
         }
         

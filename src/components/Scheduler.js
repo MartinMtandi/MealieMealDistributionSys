@@ -34,7 +34,7 @@ export default function Scheduler({schedule, ward}) {
             >
             <ListItem alignItems="flex-start">
             <ListItemAvatar>
-              <Avatar alt="A" src="/static/images/avatar/1.jpg" />
+              <Avatar alt={s.family.identifier} src="/static/images/avatar/1.jpg" />
             </ListItemAvatar>
             <ListItemText
                   primary={s.family.head}
@@ -48,7 +48,7 @@ export default function Scheduler({schedule, ward}) {
                       >
                         {s.household.address} Nkulumane 12
                   </Typography>
-                      {" — Family" + s.family.identifier + "is scheduled to purchase mealie meal in the "}  {} <span className={classes.span}>{s.section} </span >{"at"} <span className={classes.span}>{s.place}</span>
+                      {" — Family " + s.family.identifier + "is scheduled to purchase mealie meal in the "}  {} <span className={classes.span}>{s.section} </span >{"at"} <span className={classes.span}>{s.place}</span>
                     </React.Fragment>
                 
                   }

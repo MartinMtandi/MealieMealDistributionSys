@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {useState,useEffect, Fragment} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import {ListItem, Button, Divider, ListItemText, Typography} from '@material-ui/core';
 import Swal from 'sweetalert2';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import { fetchSchedule } from '../actions/scheduleActions';
+import { connect, useSelector, useDispatch } from 'react-redux';
+import SaleView from './SaleView';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,6 +29,20 @@ const useStyles = makeStyles((theme) => ({
 
 export default function HouseholdsList() {
   const classes = useStyles();
+
+  const[verified, setVerified]=useState(false)
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+
+    // this.props.fetchPosts();    
+    dispatch(fetchSchedule());
+    
+    
+ }
+ , [])
+
+ const schedule = useSelector(state => state.schedule.items)
 
   const handleClick = () => {
     Swal.fire({
@@ -85,149 +103,23 @@ export default function HouseholdsList() {
 
   return (
     <List className={classes.root}>
-      <ListItem alignItems="flex-start">
-        <ListItemText
-          primary="16125 Nkulumane 12"
-          secondary={
-            <React.Fragment>
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}
-                color="textPrimary"
-              >
-                Melusi Sibanda
-              </Typography>
-              {" — 0775412662"} <br />
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inlinePadding}
-                color="textPrimary"
-              >
-                Family Members
-              </Typography>
-              {" — 2"} <br />
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inlinePadding}
-                color="textPrimary"
-              >
-                Household
-              </Typography>
-              {" — B"} <br />
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inlinePadding}
-                color="textPrimary"
-              >
-                Created
-              </Typography>
-              {" — 2 Weeks Ago"}<br/>
-              <Button onClick={handleVerification}  size="small" variant="outlined" startIcon={<ErrorOutlineIcon />} className={classes.margin}>Verify Customer</Button>
-              <Button onClick={handleClick}  size="small" variant="outlined" className={classes.margin}>Make Sale</Button>
-            </React.Fragment>
-          }
+      {schedule.map(s =>
+        
+        <SaleView
+          key={s.id}
+         id={s.id}
+          address={s.household.address}
+          identifier={s.family.identifier}
+          members={s.family.number_of_people}
+          ticket_number={22/*s.ticket_number*/}
+          ward={s.household.ward}
+          head={s.family.head}
+          phone={s.family.contact}
+        
         />
-      </ListItem>
-      <Divider variant="inset" component="li" />
-      <ListItem alignItems="flex-start">
-        <ListItemText
-          primary="8845 Nkulumane 12"
-          secondary={
-            <React.Fragment>
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}
-                color="textPrimary"
-              >
-                Alice Chigomba
-              </Typography>
-              {" — 0772113862"} <br />
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inlinePadding}
-                color="textPrimary"
-              >
-                Family Members
-              </Typography>
-              {" — 4"} <br />
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inlinePadding}
-                color="textPrimary"
-              >
-                Household
-              </Typography>
-              {" — A"} <br />
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inlinePadding}
-                color="textPrimary"
-              >
-                Created
-              </Typography>
-              {" — 1 month Ago"}<br />
-              <Button onClick={handleVerification}  size="small" variant="outlined" startIcon={<ErrorOutlineIcon />} className={classes.margin}>Verify Customer</Button>
-              <Button onClick={handleClick}  size="small" variant="outlined" className={classes.margin}>Make Sale</Button>
-            </React.Fragment>
-          }
-        />
-      </ListItem>
-      <Divider variant="inset" component="li" />
-      <ListItem alignItems="flex-start">
-        <ListItemText
-          primary="14367 Nkulumane 12"
-          secondary={
-            <React.Fragment>
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}
-                color="textPrimary"
-              >
-                Philani Nkiwane
-              </Typography>
-              {" — 0712344832"} <br />
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inlinePadding}
-                color="textPrimary"
-              >
-                Family Members
-              </Typography>
-              {" — 6"} <br />
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inlinePadding}
-                color="textPrimary"
-              >
-                Household
-              </Typography>
-              {" — C"} <br />
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inlinePadding}
-                color="textPrimary"
-              >
-                Created
-              </Typography>
-              {" — 1 Year Ago"}<br />
-              <Button onClick={handleVerification}  size="small" variant="outlined" startIcon={<ErrorOutlineIcon />} className={classes.margin}>Verify Customer</Button>
-              <Button onClick={handleClick}  size="small" variant="outlined" className={classes.margin}>Make Sale</Button>
-            </React.Fragment>
-          }
-        />
-      </ListItem>
+      
+      )}
+
     </List>
   );
 }

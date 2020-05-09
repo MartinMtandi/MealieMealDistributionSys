@@ -39,6 +39,10 @@ export default function MenuAppBar() {
     setAnchorEl(null);
   };
 
+  const handleLogout = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.appBar}>
@@ -78,7 +82,7 @@ export default function MenuAppBar() {
               >
                 <MenuItem onClick={handleClose}>My Account</MenuItem>
                 <MenuItem ><Link className={classes.link} to="/create-household">Create Household</Link></MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
               </Menu>
             </div>
         </Toolbar>

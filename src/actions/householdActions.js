@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { FETCH_HOUSEHOLD, NEW_HOUSEHOLD } from "./types";
+import { FETCH_HOUSEHOLD, NEW_HOUSEHOLD, SET_SUCCESS, GET_ERRORS } from "./types";
 
 
 export function fetchHouseholds() {
@@ -7,7 +7,7 @@ export function fetchHouseholds() {
     console.log("schedule");
     return async function (dispatch) {
         
-        await axios.get("http://maize.ubhejanelabs.com/api/households")
+        await axios.get("http://portalapi.test/api/households")//http://maize.ubhejanelabs.com/api/households")
             .then(household => dispatch({
                 type: FETCH_HOUSEHOLD,
                 payload:household.data
@@ -17,6 +17,10 @@ export function fetchHouseholds() {
         .catch(function (error) {
             // handle error
             console.log(error);
+            dispatch({
+                type:GET_ERRORS,
+                payload: error
+            })
         })
             }
 
@@ -40,13 +44,30 @@ export function newHousehold(household) {
         await axios.post('http://portalapi.test/api/household', household, {
             headers: headers
         })
-        .then(household => dispatch({
-            type: NEW_HOUSEHOLD,
-            payload:household.data
-        })
+            .then(household => {
+                if (!household.data.error) {
+                    dispatch({
+                        type: NEW_HOUSEHOLD,
+                        payload: household.data
+                    })
+                    dispatch({
+                        type: SET_SUCCESS
+                    })
+                }
+                else {
+                    dispatch({
+                        type:GET_ERRORS,
+                        payload: household.data.error
+                    })
+                }
+            }
         )
         .catch(function (error) {
             console.log(error);
+            dispatch({
+                type:GET_ERRORS,
+                payload: error
+            })
           });
 
             }

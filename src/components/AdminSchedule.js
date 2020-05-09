@@ -4,6 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Select, TextField, OutlinedInput, InputLabel, InputAdornment, FormControl, MenuItem, Button, Typography } from '@material-ui/core';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import { newSchedule } from '../actions/scheduleActions'
+import Alert from '@material-ui/lab/Alert'
+import { clearErrors } from '../actions/errorActions'
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -18,6 +20,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function AdminSchedule() {
+
+
+  useEffect(() => {
+   
+    const timer = setTimeout(() => {
+     dispatch(clearErrors())
+     
+   }, 10000);
+   return () => clearTimeout(timer);
+     
+   }
+   , [])
 
   const dispatch = useDispatch();
 
@@ -43,13 +57,29 @@ export default function AdminSchedule() {
      }
     dispatch(newSchedule(schedule))
 
+    setValues({ ...values, 
+      units: '',
+      weight: '',
+      ward: '',
+      place: '',
+      date: '',
+});
   }
+
+  const errors = useSelector(state => state.error.errors)
+  const success = useSelector(state => state.error.success)
+
+
   return (
     <div>
       <form>
         <Typography className={classes.header} variant="h6" gutterBottom>
           Schedule Distribution
         </Typography>
+
+     
+        {errors && <Alert severity="error">{errors.message}</Alert>} 
+        {success && <Alert severity="success">Schedule created</Alert>}
         <TextField 
           fullWidth 
           value={values.units} 
@@ -86,9 +116,9 @@ export default function AdminSchedule() {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          <MenuItem value={21}>Ward 21</MenuItem>
+          <MenuItem value={20}>Ward 20</MenuItem>
           <MenuItem value={22}>Ward 22</MenuItem>
-          <MenuItem value={23}>Ward 23</MenuItem>
+          <MenuItem value={24}>Ward 24</MenuItem>
         </Select>
       </FormControl>
       <FormControl fullWidth variant="outlined" className={clsx(classes.margin, classes.textField)}>
@@ -105,7 +135,7 @@ export default function AdminSchedule() {
           </MenuItem>
           <MenuItem value="coolland">Coolland Supermarket</MenuItem>
           <MenuItem value="manemo">Manemo Suprette</MenuItem>
-          <MenuItem value="White house">White House</MenuItem>
+          <MenuItem value="white house">White House</MenuItem>
         </Select>
       </FormControl>
       <TextField 

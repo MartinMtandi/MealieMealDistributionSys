@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { FETCH_SCHEDULE, NEW_SCHEDULE } from "./types";
+import { FETCH_SCHEDULE, NEW_SCHEDULE, SET_SUCCESS, GET_ERRORS } from "./types";
 
 
 export function fetchSchedule() {
@@ -40,13 +40,32 @@ export function newSchedule(schedule) {
      await   axios.post('http://portalapi.test/api/schedule', schedule, {
         headers: headers
       })
-        .then(schedule => dispatch({
-            type: NEW_SCHEDULE,
-            payload:schedule.data
-        })
+         .then(schedule => {
+             if (!schedule.data.error) {
+                 dispatch({
+                     type: NEW_SCHEDULE,
+                     payload: schedule.data
+                 })
+
+                 dispatch({
+                    type:SET_SUCCESS
+                })
+             }
+
+             else {
+                dispatch({
+                    type:GET_ERRORS,
+                    payload: schedule.data.error
+                })
+             }
+         }
         )
         .catch(function (error) {
             console.log(error);
+            dispatch({
+                type:GET_ERRORS,
+                payload: error
+            })
           });
 
             }
