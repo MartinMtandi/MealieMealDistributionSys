@@ -14,6 +14,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
+import HomeIcon from '@material-ui/icons/Home';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -166,7 +167,7 @@ export default function CustomAppBar() {
                 color="inherit"
                 aria-label="open drawer"
             >
-                <MenuIcon />
+                <HomeIcon />
             </IconButton>
         </Link>
          
@@ -189,7 +190,7 @@ export default function CustomAppBar() {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
+              <Badge badgeContent={0} color="secondary">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
@@ -198,7 +199,7 @@ export default function CustomAppBar() {
               aria-label="account of current user"
               aria-controls={menuId}
               aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
+             // onClick={handleProfileMenuOpen}
               color="inherit"
             >
               <MenuIcon />

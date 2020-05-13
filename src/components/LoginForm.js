@@ -9,8 +9,11 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { Link } from 'react-router-dom';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import { login, logout } from '../actions/userActions'
-
+import Alert from '@material-ui/lab/Alert'
+import { clearErrors } from '../actions/errorActions'
+import { createBrowserHistory } from 'history';
 import Logo from '../images/ekhaya.png'
+import { withRouter } from 'react-router';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -36,21 +39,25 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-
-export default function LoginForm(props) {
+ function LoginForm(props) {
 
     const auth = useSelector(state => state.user.loggedin);
     const token = useSelector(state => state.user.user);
 
     useEffect(() => {
   
-        if (auth) {
+         if (auth) {
           props.history.push('/dashboard')
         //   console.log(token.access_token)
-        }
+        } 
+        const timer = setTimeout(() => {
+            dispatch(clearErrors())
+            
+          }, 10000);
+          return () => clearTimeout(timer);
         
      }
-        , [auth, props.history])
+        , [auth])
       
      
       const dispatch = useDispatch();
@@ -59,8 +66,6 @@ export default function LoginForm(props) {
     const [values, setValues] = React.useState({
         email: '',
         password: '',
-        weight: '',
-        weightRange: '',
         showPassword: false,
       });
     
@@ -86,11 +91,15 @@ export default function LoginForm(props) {
           password: values.password
         }
        
-        dispatch(login(userDetails));
+        dispatch(login(userDetails, () => {
+            props.history.push('/dashboard')
+        }));
        
        
     
-      }
+    }
+    const errors = useSelector(state => state.error.errors)
+    const success = useSelector(state => state.error.success)
     
     return (
         <div className={classes.root}>
@@ -98,6 +107,8 @@ export default function LoginForm(props) {
                 <img src={Logo} alt="Logo" />
                 <Paper elevation={3} className={classes.paper}>
                     <div>
+                    {errors && <Alert severity="error">{errors.message}</Alert>} 
+        {success && <Alert severity="success">Family added</Alert>}
                         <Typography variant="h6" gutterBottom>
                             Admin Login
                         </Typography>
@@ -133,7 +144,7 @@ export default function LoginForm(props) {
                             labelWidth={70}
                         />
                         </FormControl>
-                        <Link to="/dashboard">
+                        {/* <Link to="/dashboard"> */}
                             <Button
                                 variant="contained"
                                 color="primary"
@@ -142,8 +153,8 @@ export default function LoginForm(props) {
                                 onClick={handleSubmit}
                             >
                                 Sign In
-                            </Button>
-                        </Link>
+                            </Button> 
+                        {/* </Link> */}
                     </div> 
                 </Paper>
                 <Link to="/" style={{color: '#fff', margin: '15px 0 50px 0', textDecoration: 'none'}}>Not an Admin? <span className={classes.span}>Go Back</span></Link>
@@ -153,3 +164,5 @@ export default function LoginForm(props) {
 }
 
 
+
+export default withRouter(LoginForm)

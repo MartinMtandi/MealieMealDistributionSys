@@ -1,8 +1,8 @@
-import { LOGIN, LOGOUT, REGISTER,SET_USER } from './types';
+import { LOGIN, LOGOUT, REGISTER,SET_USER,GET_ERRORS } from './types';
 import axios from 'axios'
 
 
-export function login(userDetails) {
+export function login(userDetails, callback) {
   
         
       return function (dispatch) {
@@ -29,6 +29,11 @@ export function login(userDetails) {
                         loggedin: false
                         //write to local storage
                     })
+                    dispatch({
+                      type:GET_ERRORS,
+                      payload: {message:"Invalid login details"}
+                  })
+                   
                 }
             
            else
@@ -44,9 +49,16 @@ export function login(userDetails) {
                         loggedin: true
                         //write to local storage
                     }) 
+                 // callback();
                     
                 }
-            })
+            }).catch(function (error) {
+              console.log(error);
+              dispatch({
+                  type:GET_ERRORS,
+                  payload: error
+              })
+            });
         //  .then(data => console.log(data));
               // .then(   res => res.data)
                 //.catch(err => console.log(err,'fetch warning'))
@@ -59,7 +71,7 @@ export function login(userDetails) {
 
 
 
-export function logout() {
+export function logout(callback) {
     console.log('logout789') 
     localStorage.removeItem('access_token');
     return function (dispatch) {
@@ -68,6 +80,7 @@ export function logout() {
             loggedin: false
             //delete from local storage
         })
+      callback();
         };
         //async function fetchData() {
            /*  setPosts(
@@ -157,7 +170,7 @@ export function setuser(token) {
         //async function fetchData() {
            /*  setPosts(
               await */
-      fetch('http://192.168.86.58/portalapi/public/api/profile', {
+      fetch('http://maize.ubhejanelabs.com/api/profile', {
         method: 'GET',
           headers: {
           'accept':'application/json',

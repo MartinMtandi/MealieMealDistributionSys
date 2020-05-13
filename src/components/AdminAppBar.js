@@ -5,6 +5,9 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
 import { Link } from 'react-router-dom';
+import { connect, useSelector, useDispatch } from 'react-redux';
+import { logout } from '../actions/userActions'
+import { withRouter } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,7 +29,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function MenuAppBar() {
+function MenuAppBar(props) {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -40,6 +44,9 @@ export default function MenuAppBar() {
   };
 
   const handleLogout = () => {
+    dispatch(logout(() => {
+      props.history.push('/')
+  }));
     setAnchorEl(null);
   };
 
@@ -82,7 +89,7 @@ export default function MenuAppBar() {
               >
                 <MenuItem onClick={handleClose}>My Account</MenuItem>
                 <MenuItem ><Link className={classes.link} to="/create-household">Create Household</Link></MenuItem>
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                <MenuItem onClick={handleLogout}><Link className={classes.link} to="/" onClick={handleLogout}>Logout</Link></MenuItem>
               </Menu>
             </div>
         </Toolbar>
@@ -90,3 +97,5 @@ export default function MenuAppBar() {
     </div>
   );
 }
+
+export default withRouter(MenuAppBar)

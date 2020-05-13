@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import {Provider}  from 'react-redux'
 
@@ -12,18 +12,30 @@ import NewHousehold from './pages/CreateHouseholdPage'
 import store from './store'
 import './App.css';
 import { createBrowserHistory } from 'history';
-
+import { connect, useSelector, useDispatch } from 'react-redux';
+import { setuser } from './actions/userActions';
 
 
 
 function App() {
+  const user = useSelector(state => state.user.loggedin)
 
+  useEffect(() => {
+  
+    const access = localStorage.getItem('access_token')
+    if (access) {
+      store.dispatch(setuser(access))
+    }
+
+  }, [])  
+  
   const myhistory = createBrowserHistory();
   return (
-    <Provider store={store}>
+
+     
     <Router history={myhistory}>
     <div className="App">
-      <Switch>
+      {/* <Switch> */}
         <Route 
             exact
             path="/login"
@@ -48,16 +60,36 @@ function App() {
             exact
             path="/dashboard"
             component={AdminTabs}
+            // render={props => {
+            //     return (
+            //         {(this.props.users.user) ? <AdminTabs /> : <LoginPage />}
+                
+            //   )
+            // }}
+          /*   render={props => {
+              return (
+                ( 
+                  <div>
+                    {user.loggedin ?
+                      <AdminTabs />
+                     : 
+                     <LoginPage /> 
+                     }
+                  </div>
+                )
+              )
+            }} */
+  
         />
         <Route 
             exact
             path="/"
             component ={MenuPage}
         />
-      </Switch>
+      {/* </Switch> */}
     </div>
       </Router>
-      </Provider>
+     
   );
 }
 

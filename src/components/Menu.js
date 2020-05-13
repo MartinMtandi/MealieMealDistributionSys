@@ -26,7 +26,7 @@ function Menu() {
     const classes = useStyles();
     return (
         <div className="auth-card">
-            <img style={{marginTop: '50px'}} src={Logo} alt="Logo" />
+           {/*  <img style={{marginTop: '50px'}} src={Logo} alt="Logo" /> */}
             <Grid container classname={classes.grid}>
                 <Grid item xs={6} sm={6} md={3}>
                     <Link to="/schedule">
