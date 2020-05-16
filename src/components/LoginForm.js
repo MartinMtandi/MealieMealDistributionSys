@@ -104,7 +104,7 @@ const useStyles = makeStyles(theme => ({
     return (
         <div className={classes.root}>
            <div className="auth-card">
-                <img src={Logo} alt="Logo" />
+                
                 <Paper elevation={3} className={classes.paper}>
                     <div>
                     {errors && <Alert severity="error">{errors.message}</Alert>} 
